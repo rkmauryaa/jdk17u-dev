@@ -1,5 +1,4 @@
 /*
- * Copyright Amazon.com Inc. or its affiliates. All Rights Reserved.
  * Copyright (c) 2023, Oracle and/or its affiliates. All rights reserved.
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
  *
@@ -20,21 +19,15 @@
  * Please contact Oracle, 500 Oracle Parkway, Redwood Shores, CA 94065 USA
  * or visit www.oracle.com if you need additional information or have any
  * questions.
- *
  */
 
 /*
- * Note: This runs the unified logging part of gtest in async mode.
- * The reason is that hotspot can't safely turn off asynclogging dyanmically.
- * There's no TEST_OTHER_VM_F.
- */
-
-/* @test
- * @summary Run logging gtest in async mode.
- * @library /test/lib
- * @modules java.base/jdk.internal.misc
- *          java.xml
- * @requires vm.flagless
- * @run main/native GTestWrapper --gtest_filter=AsyncLogTest* -Xlog:async
- * @run main/native GTestWrapper --gtest_filter=Log*Test* -Xlog:async
+ * @test
+ * @bug 8308144
+ * @summary tests that the SSLFlowDelegate doesn't accumulate application data when the
+ *          downReader doesn't request any
+ * @modules java.net.http/jdk.internal.net.http
+ * @run testng/othervm  -Djdk.internal.httpclient.debug=true
+ *                      -Djavax.net.debug=ssl:handshake
+ *                      java.net.http/jdk.internal.net.http.SSLFlowDelegateTest
  */
